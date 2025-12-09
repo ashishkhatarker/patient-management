@@ -2,6 +2,7 @@ package com.ash.patient_service.service;
 
 import com.ash.patient_service.dto.PatientRequestDTO;
 import com.ash.patient_service.dto.PatientResponseDTO;
+import com.ash.patient_service.exception.EmailAlreadyExistsException;
 import com.ash.patient_service.mapper.PatientMapper;
 import com.ash.patient_service.model.Patient;
 import com.ash.patient_service.repository.PatientRepository;
@@ -31,10 +32,19 @@ public class PatientService {
     }
 
     public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO){
+        if(patientRepository.existsByEmail(patientRequestDTO.getEmail())){
+            throw new EmailAlreadyExistsException("A patient with this email"
+            + " already exists "+ patientRequestDTO.getEmail());
+        }
+
           Patient newPatient = patientRepository.save(
                   PatientMapper.toModel(patientRequestDTO));
+
+          // an email address should be unique
 
           return PatientMapper.toDTO(newPatient);
 
     }
+
+
 }
