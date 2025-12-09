@@ -1,0 +1,3 @@
+### Create a patient
+POST http://localhost:4000/patients
+ Content-Type: application/json

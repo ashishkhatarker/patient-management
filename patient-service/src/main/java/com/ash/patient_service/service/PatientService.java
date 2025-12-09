@@ -1,5 +1,6 @@
 package com.ash.patient_service.service;
 
+import com.ash.patient_service.dto.PatientRequestDTO;
 import com.ash.patient_service.dto.PatientResponseDTO;
 import com.ash.patient_service.mapper.PatientMapper;
 import com.ash.patient_service.model.Patient;
@@ -29,4 +30,11 @@ public class PatientService {
                 .map(PatientMapper::toDTO).toList();
     }
 
+    public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO){
+          Patient newPatient = patientRepository.save(
+                  PatientMapper.toModel(patientRequestDTO));
+
+          return PatientMapper.toDTO(newPatient);
+
+    }
 }
