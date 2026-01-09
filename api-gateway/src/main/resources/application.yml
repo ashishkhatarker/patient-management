@@ -1,1 +1,32 @@
-spring.application.name=api-gateway
+server:
+  port: 4004
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+           - id: patient-service-routes
+             uri: http://patient-service:4000 # 'lb' prefix for load-balancing
+             predicates:
+               - Path=/api/patients/** # Matches requests starting with /api/my-service
+             filters:
+               - StripPrefix=1
+
+              ### REST CLIENT -> http://localhost:4004/api/patients
+              ### API GATEWAY -> http://patient-service:4000/patients
+              ### PATIENT SERVICE (SPRING BOOT APP) -> /patient -> Patients Array
+
+           - id: api-docs-patient-route
+             uri: http://patient-service:4000
+             predicates:
+               - Path=/api=docs/patients
+             filters:
+               - RewritePath=/api-docs/patients,/v3/api-docs
+
+             ### REST-CLIENT -> http://localhost:4004/api-docs/patients
+             ### API-GATEWAY -> http://patient-service:4000/v3/api-docs
+
+             # spring.cloud.gateway.server.webflux
