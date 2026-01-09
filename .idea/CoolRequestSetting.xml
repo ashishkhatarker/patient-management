@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CoolRequestSetting">
+    <option name="serializePaths">
+      <list>
+        <option value="C:\Users\Dell\.config\.cool-request\request\serialize\75240b55dd6b4c09b90bbf4aa6b0dc70" />
+        <option value="C:\Users\Dell\.config\.cool-request\request\serialize\2f482ad18fcd4ab1b25f951e4032407a" />
+      </list>
+    </option>
     <option name="projectCachePath" value="project-cbf157c6-c163-40ba-87e9-ace7042298c3" />
   </component>
 </project>
