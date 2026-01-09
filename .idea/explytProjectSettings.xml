@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExplytProjectSettings">
+    <option name="explytProjectSettingsState" value="{&quot;serializableTestSourceRoot&quot;:{&quot;path&quot;:&quot;D:\\BackEnd\\java\\Chris Blakely\\patient-management\\analytics-service\\src\\test\\java&quot;},&quot;recentlyUsedTestPackage&quot;:&quot;com.ash.analyticsservice.kafka&quot;,&quot;mockFramework&quot;:&quot;MOCKITO_CORE&quot;,&quot;testFramework&quot;:&quot;JUNIT_5&quot;,&quot;postProcessorsModes&quot;:{&quot;quickFixer&quot;:true,&quot;llmCompilationFixer&quot;:false,&quot;errorsCommenter&quot;:false,&quot;errorDeleter&quot;:false,&quot;llmRuntimeFixer&quot;:false,&quot;testSuiteMinimizer&quot;:false,&quot;existedTestsSafetyChecker&quot;:false}}" />
+  </component>
+</project>
