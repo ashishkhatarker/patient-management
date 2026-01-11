@@ -8,6 +8,18 @@ spring:
       server:
         webflux:
           routes:
+           - id: auth-service
+             uri: http://auth-service:4005
+             predicates:
+               - Path=/auth/**
+             filters:
+               - StripPrefix=1
+
+            ### http://localhost:4004/auth/login
+            ### API GATEWAY -> http://auth-service:4005/login
+
+
+          # Route for /api/patients/** to patient-service
            - id: patient-service-routes
              uri: http://patient-service:4000 # 'lb' prefix for load-balancing
              predicates:
@@ -19,7 +31,7 @@ spring:
              ### API GATEWAY -> http://patient-service:4000/patients
              ### PATIENT SERVICE (SPRING BOOT APP) -> /patient -> Patients Array
 
-
+          # Route for /api/docs/patients to patient-service /v3/api/docs
            - id: api-docs-patient-route
              uri: http://patient-service:4000
              predicates:
