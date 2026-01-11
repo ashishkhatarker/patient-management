@@ -8,7 +8,7 @@ spring:
       server:
         webflux:
           routes:
-           - id: auth-service
+           - id: auth-service-route
              uri: http://auth-service:4005
              predicates:
                - Path=/auth/**
@@ -20,12 +20,13 @@ spring:
 
 
           # Route for /api/patients/** to patient-service
-           - id: patient-service-routes
+           - id: patient-service-route
              uri: http://patient-service:4000 # 'lb' prefix for load-balancing
              predicates:
                - Path=/api/patients/** # Matches requests starting with /api/patient-service
              filters:
                - StripPrefix=1
+               - JwtValidation
 
              ### REST CLIENT -> http://localhost:4004/api/patients
              ### API GATEWAY -> http://patient-service:4000/patients
