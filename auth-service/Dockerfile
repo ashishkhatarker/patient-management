@@ -10,7 +10,7 @@ COPY src ./src
 
 RUN mvn clean package
 
-FROM cimg/openjdk:21.0.9 AS runner
+FROM amazoncorretto:21.0.9 AS runner
 
 WORKDIR /app
 
