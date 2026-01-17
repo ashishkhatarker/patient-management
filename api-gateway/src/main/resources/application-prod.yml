@@ -1,0 +1,62 @@
+server:
+  port: 4004
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: auth-service-route
+              uri: http://host.docker.internal:4005
+              predicates:
+                - Path=/auth/**
+              filters:
+                - StripPrefix=1
+
+            ### http://localhost:4004/auth/login
+            ### API GATEWAY -> http://auth-service:4005/login
+
+
+            # Route for /api/patients/** to patient-service
+            - id: patient-service-route
+              uri: http://host.docker.internal:4000 # 'lb' prefix for load-balancing
+              predicates:
+                - Path=/api/patients/** # Matches requests starting with /api/patient-service
+              filters:
+                - StripPrefix=1
+                - JwtValidation
+
+              ### REST CLIENT -> http://localhost:4004/api/patients
+              ### API GATEWAY -> http://patient-service:4000/patients
+              ### PATIENT SERVICE (SPRING BOOT APP) -> /patient -> Patients Array
+
+            # Route for /api/docs/patients to patient-service /v3/api/docs
+            - id: api-docs-patient-route
+              uri: http://host.docker.internal:4000
+              predicates:
+                - Path=/api-docs/patients
+              filters:
+                - RewritePath=/api-docs/patients,/v3/api-docs
+
+              ### REST-CLIENT -> http://localhost:4004/api-docs/patients
+              ### API-GATEWAY -> http://patient-service:4000/v3/api-docs
+
+
+            - id: api-docs-auth-route
+              uri: http://host.docker.internal:4005
+              predicates:
+                - Path=/api-docs/auth
+              filters:
+                - RewritePath=/api-docs/auth,/v3/api-docs
+
+
+
+
+
+
+
+
+
+              # spring.cloud.gateway.server.webflux
