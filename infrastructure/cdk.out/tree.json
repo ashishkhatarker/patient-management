@@ -1127,7 +1127,7 @@
                   "brokerAzDistribution": "DEFAULT"
                 },
                 "clusterName": "kafka-cluster",
-                "kafkaVersion": "2.8.0",
+                "kafkaVersion": "3.8.0",
                 "numberOfBrokerNodes": 1
               }
             },
